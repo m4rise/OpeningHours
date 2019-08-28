@@ -91,6 +91,6 @@ class OpeningHours
 
     public function toStringFormat(): string
     {
-        return $this->getStart() . ' - ' . $this->getEnd();
+        return $this->getStart().' - '.$this->getEnd();
     }
 }

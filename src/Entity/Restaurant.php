@@ -60,6 +60,29 @@ class Restaurant
         return $this->openingHours;
     }
 
+    public function addOpeningHour(OpeningHours $openingHour): self
+    {
+        if (!$this->openingHours->contains($openingHour)) {
+            $this->openingHours[] = $openingHour;
+            $openingHour->setRestaurant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOpeningHour(OpeningHours $openingHour): self
+    {
+        if ($this->openingHours->contains($openingHour)) {
+            $this->openingHours->removeElement($openingHour);
+            // set the owning side to null (unless already changed)
+            if ($openingHour->getRestaurant() === $this) {
+                $openingHour->setRestaurant(null);
+            }
+        }
+
+        return $this;
+    }
+
     /**
      * Génère un tableau associatif sur une semaine de couple jour => horaires d'ouverture
      *
@@ -83,9 +106,11 @@ class Restaurant
     }
 
     /**
-     * Renvoie le tableau après avoir éclaté les tableaux d'horaires journalier d'un restaurant en une chaine de caractère
+     * Renvoie le tableau après avoir éclaté les tableaux de valeur associé à chaque clé en une chaine de
+     * caractère
      *
-     * @var $dayOpeningHours OpeningHours[]
+     * @param array $dayOpeningHours
+     *
      * @return array
      */
     private function dayOpeningHoursToString(array $dayOpeningHours): array
@@ -94,29 +119,7 @@ class Restaurant
             $value = implode(', ', $value);
             $dayOpeningHours[$key] = $value;
         }
+
         return $dayOpeningHours;
-    }
-
-    public function addOpeningHour(OpeningHours $openingHour): self
-    {
-        if (!$this->openingHours->contains($openingHour)) {
-            $this->openingHours[] = $openingHour;
-            $openingHour->setRestaurant($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOpeningHour(OpeningHours $openingHour): self
-    {
-        if ($this->openingHours->contains($openingHour)) {
-            $this->openingHours->removeElement($openingHour);
-            // set the owning side to null (unless already changed)
-            if ($openingHour->getRestaurant() === $this) {
-                $openingHour->setRestaurant(null);
-            }
-        }
-
-        return $this;
     }
 }

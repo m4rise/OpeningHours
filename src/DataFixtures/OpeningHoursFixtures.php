@@ -15,12 +15,12 @@ class OpeningHoursFixtures extends Fixture implements DependentFixtureInterface
         $timeSlots = [
             'morning' => [
                 'start' => ['11:00', '11:30', '12:00'],
-                'end' => ['13:00','13:30','14:00']
+                'end' => ['13:00', '13:30', '14:00']
             ],
             'evening' => [
-                    'start' => ['18:30', '19:00', '19:30'],
-                    'end' => ['20:00','21:00','22:00']
-                ],
+                'start' => ['18:30', '19:00', '19:30'],
+                'end' => ['20:00', '21:00', '22:00']
+            ],
         ];
         $ms = $timeSlots['morning']['start'];
         $me = $timeSlots['morning']['end'];
@@ -28,7 +28,7 @@ class OpeningHoursFixtures extends Fixture implements DependentFixtureInterface
         $ee = $timeSlots['evening']['end'];
 
         // pour les 3 restaurants
-        for ($i=0; $i<3; $i++) {
+        for ($i = 0; $i < 3; $i++) {
             $oh = (new OpeningHours())
                 ->setRestaurant($this->getReference('restaurant_'.$i))
                 ->setDay(Day::MONDAY)
@@ -118,7 +118,7 @@ class OpeningHoursFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return [
-          RestaurantFixtures::class
+            RestaurantFixtures::class
         ];
     }
 }

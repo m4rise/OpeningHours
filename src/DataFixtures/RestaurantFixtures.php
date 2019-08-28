@@ -16,7 +16,7 @@ class RestaurantFixtures extends Fixture
             "Palais d'Asie"
         ];
 
-        for ($i = 0, $r = count($restaurantNames); $i<$r; $i++) {
+        for ($i = 0, $r = count($restaurantNames); $i < $r; $i++) {
             $restaurant = (new Restaurant())
                 ->setName($restaurantNames[$i]);
             $this->addReference('restaurant_'.$i, $restaurant);

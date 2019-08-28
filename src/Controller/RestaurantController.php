@@ -14,6 +14,7 @@ class RestaurantController extends AbstractController
     public function show(Restaurant $restaurant)
     {
         $weekOpeningHours = $restaurant->getFormattedWeekOpeningHours();
+
         return $this->render('restaurant/index.html.twig', [
             'restaurant' => $restaurant,
             'weekOpeningHours' => $weekOpeningHours
