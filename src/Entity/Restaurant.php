@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -21,6 +23,16 @@ class Restaurant
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\OpeningHours", mappedBy="restaurant")
+     */
+    private $openingHours;
+
+    public function __construct()
+    {
+        $this->openingHours = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -34,6 +46,37 @@ class Restaurant
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|OpeningHours[]
+     */
+    public function getOpeningHours(): Collection
+    {
+        return $this->openingHours;
+    }
+
+    public function addOpeningHour(OpeningHours $openingHour): self
+    {
+        if (!$this->openingHours->contains($openingHour)) {
+            $this->openingHours[] = $openingHour;
+            $openingHour->setRestaurant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOpeningHour(OpeningHours $openingHour): self
+    {
+        if ($this->openingHours->contains($openingHour)) {
+            $this->openingHours->removeElement($openingHour);
+            // set the owning side to null (unless already changed)
+            if ($openingHour->getRestaurant() === $this) {
+                $openingHour->setRestaurant(null);
+            }
+        }
 
         return $this;
     }
