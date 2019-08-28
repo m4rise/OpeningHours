@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Classes\Day;
 use App\Entity\OpeningHours;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -30,84 +31,84 @@ class OpeningHoursFixtures extends Fixture implements DependentFixtureInterface
         for ($i=0; $i<3; $i++) {
             $oh = (new OpeningHours())
                 ->setRestaurant($this->getReference('restaurant_'.$i))
-                ->setDay(OpeningHours::MONDAY)
+                ->setDay(Day::MONDAY)
                 ->setStart($es[$i])
                 ->setEnd($ee[$i]);
             $manager->persist($oh);
 
             $oh = (new OpeningHours())
                 ->setRestaurant($this->getReference('restaurant_'.$i))
-                ->setDay(OpeningHours::TUESDAY)
+                ->setDay(Day::TUESDAY)
                 ->setStart($ms[$i])
                 ->setEnd($me[$i]);
             $manager->persist($oh);
 
             $oh = (new OpeningHours())
                 ->setRestaurant($this->getReference('restaurant_'.$i))
-                ->setDay(OpeningHours::TUESDAY)
+                ->setDay(Day::TUESDAY)
                 ->setStart($es[$i])
                 ->setEnd($ee[$i]);
             $manager->persist($oh);
 
             $oh = (new OpeningHours())
                 ->setRestaurant($this->getReference('restaurant_'.$i))
-                ->setDay(OpeningHours::WEDNESDAY)
+                ->setDay(Day::WEDNESDAY)
                 ->setStart($ms[$i])
                 ->setEnd($me[$i]);
             $manager->persist($oh);
 
             $oh = (new OpeningHours())
                 ->setRestaurant($this->getReference('restaurant_'.$i))
-                ->setDay(OpeningHours::WEDNESDAY)
+                ->setDay(Day::WEDNESDAY)
                 ->setStart($es[$i])
                 ->setEnd($ee[$i]);
             $manager->persist($oh);
 
             $oh = (new OpeningHours())
                 ->setRestaurant($this->getReference('restaurant_'.$i))
-                ->setDay(OpeningHours::THURSDAY)
+                ->setDay(Day::THURSDAY)
                 ->setStart($ms[$i])
                 ->setEnd($me[$i]);
             $manager->persist($oh);
 
             $oh = (new OpeningHours())
                 ->setRestaurant($this->getReference('restaurant_'.$i))
-                ->setDay(OpeningHours::THURSDAY)
+                ->setDay(Day::THURSDAY)
                 ->setStart($es[$i])
                 ->setEnd($ee[$i]);
             $manager->persist($oh);
 
             $oh = (new OpeningHours())
                 ->setRestaurant($this->getReference('restaurant_'.$i))
-                ->setDay(OpeningHours::FRIDAY)
+                ->setDay(Day::FRIDAY)
                 ->setStart($ms[$i])
                 ->setEnd($me[$i]);
             $manager->persist($oh);
 
             $oh = (new OpeningHours())
                 ->setRestaurant($this->getReference('restaurant_'.$i))
-                ->setDay(OpeningHours::FRIDAY)
+                ->setDay(Day::FRIDAY)
                 ->setStart($es[$i])
                 ->setEnd($ee[$i]);
             $manager->persist($oh);
 
             $oh = (new OpeningHours())
                 ->setRestaurant($this->getReference('restaurant_'.$i))
-                ->setDay(OpeningHours::SATURDAY)
+                ->setDay(Day::SATURDAY)
                 ->setStart($ms[$i])
                 ->setEnd($me[$i]);
             $manager->persist($oh);
 
             $oh = (new OpeningHours())
                 ->setRestaurant($this->getReference('restaurant_'.$i))
-                ->setDay(OpeningHours::SATURDAY)
+                ->setDay(Day::SATURDAY)
                 ->setStart($es[$i])
                 ->setEnd($ee[$i]);
             $manager->persist($oh);
 
             $oh = (new OpeningHours())
                 ->setRestaurant($this->getReference('restaurant_'.$i))
-                ->setDay(OpeningHours::SUNDAY);
+                ->setDay(Day::SUNDAY);
             $manager->persist($oh);
         }
 

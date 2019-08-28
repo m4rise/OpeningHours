@@ -13,7 +13,7 @@ class RestaurantFixtures extends Fixture
         $restaurantNames = [
             "Le bon séjour",
             "Food Express",
-            "Palais d\'Asie"
+            "Palais d'Asie"
         ];
 
         for ($i = 0, $r = count($restaurantNames); $i<$r; $i++) {

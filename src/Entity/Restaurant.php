@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Classes\Day;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -25,6 +26,7 @@ class Restaurant
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\OpeningHours", mappedBy="restaurant")
+     * @ORM\OrderBy({"day" = "ASC", "start" = "ASC"})
      */
     private $openingHours;
 
@@ -56,6 +58,43 @@ class Restaurant
     public function getOpeningHours(): Collection
     {
         return $this->openingHours;
+    }
+
+    /**
+     * Génère un tableau associatif sur une semaine de couple jour => horaires d'ouverture
+     *
+     */
+    public function getFormattedWeekOpeningHours()
+    {
+        $weekOpenHours = $this->getOpeningHours();
+        $weekDays = [];
+
+        // regroupe les différents horaires du même jour sous la même clé
+        foreach ($weekOpenHours as $openingHour) {
+            /**@var $openingHour OpeningHours */
+            if (null !== $openingHour->getStart() | null !== $openingHour->getEnd()) {
+                $weekDays[$openingHour->getDay()][] = $openingHour->toStringFormat();
+            } else {
+                $weekDays[$openingHour->getDay()][] = 'Fermé';
+            }
+        }
+
+        return array_combine(Day::getWeekDays(), $this->dayOpeningHoursToString($weekDays));
+    }
+
+    /**
+     * Renvoie le tableau après avoir éclaté les tableaux d'horaires journalier d'un restaurant en une chaine de caractère
+     *
+     * @var $dayOpeningHours OpeningHours[]
+     * @return array
+     */
+    private function dayOpeningHoursToString(array $dayOpeningHours): array
+    {
+        foreach ($dayOpeningHours as $key => $value) {
+            $value = implode(', ', $value);
+            $dayOpeningHours[$key] = $value;
+        }
+        return $dayOpeningHours;
     }
 
     public function addOpeningHour(OpeningHours $openingHour): self

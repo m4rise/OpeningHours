@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ restaurant.name }}{% endblock %}
+
+{% block body %}
+    <h1>{{ restaurant.name }}</h1>
+    <table>
+        <thead>
+        <tr>
+            <th style="text-align: left">Jour</th>
+            <th style="text-align: left; padding-left: 3rem">Horaires</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for day, dayOpeningHours in weekOpeningHours %}
+        <tr>
+            <td>{{ day }} :</td>
+            <td style="padding-left: 3rem">{{ dayOpeningHours }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
